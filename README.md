@@ -1,5 +1,3 @@
-Here’s a detailed **README.md** file for your **To-Do List Application** based on the previous code. You can place this file in the root directory of your GitHub repository.
-
 ---
 
 # **To-Do List Application**
@@ -116,10 +114,9 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## **Authors**
 
-- **Adya Parida** - Frontend Development  
-- **Team Members**:
-  - **Manu** - API, Web Server Setup
-  - **Abheek** - Database Setup
-  - **Joshua** - Firebase Authentication  
+- **Adya** - Frontend Development  
+- **Manu** - API, Web Server Setup
+- **Abheek** - Database Setup
+- **Joshua** - Firebase Authentication  
 
 ---
