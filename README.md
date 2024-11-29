@@ -116,9 +116,8 @@ This project is licensed under the [MIT License](LICENSE).
 ## **Authors**
 
 - **Adya Parida** - Frontend Development  
-- **Team Members**:
-  - **Manu** - API, Web Server Setup
-  - **Abheek** - Database Setup
-  - **Joshua** - Firebase Authentication  
+- **Manu** - API, Web Server Setup
+- **Abheek** - Database Setup
+- **Joshua** - Firebase Authentication  
 
 ---
