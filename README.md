@@ -1,4 +1,3 @@
-Here’s a detailed **README.md** file for your **To-Do List Application** based on the previous code. You can place this file in the root directory of your GitHub repository.
 
 ---
 
