@@ -1,79 +1,93 @@
-// src/components/ToDoList.js
-import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
-import {
-  collection,
-  addDoc,
-  onSnapshot,
-  deleteDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
-import NavBar from "./NavBar";
-import "../styles/ToDoList.css";
+/* src/styles/ToDoList.css */
 
-function ToDoList() {
-  const [todos, setTodos] = useState([]);
-  const [task, setTask] = useState("");
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
-      setTodos(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-    });
-    return unsubscribe;
-  }, []);
-
-  const addTodo = async () => {
-    if (task.trim()) {
-      await addDoc(collection(db, "todos"), { task, completed: false });
-      setTask("");
-    }
-  };
-
-  const toggleCompletion = async (id, completed) => {
-    const todoRef = doc(db, "todos", id);
-    await updateDoc(todoRef, { completed: !completed });
-  };
-
-  const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "todos", id));
-  };
-
-  return (
-    <div className="todo-container">
-      <NavBar />
-      <div className="todo-content">
-        <h1>Your To-Do List</h1>
-        <div className="todo-input">
-          <input
-            type="text"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-            placeholder="Enter a new task"
-            className="task-input"
-          />
-          <button onClick={addTodo} className="add-button">
-            Add
-          </button>
-        </div>
-        <ul className="todo-list">
-          {todos.map((todo) => (
-            <li key={todo.id} className="todo-item">
-              <span
-                className={todo.completed ? "completed" : ""}
-                onClick={() => toggleCompletion(todo.id, todo.completed)}
-              >
-                {todo.task}
-              </span>
-              <button onClick={() => deleteTodo(todo.id)} className="delete-button">
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-export default ToDoList;
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  
+  .todo-content {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #333;
+  }
+  
+  .todo-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .task-input {
+    flex-grow: 1;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .add-button {
+    padding: 0.8rem 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-button:hover {
+    background-color: #218838;
+  }
+  
+  .todo-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .todo-item:last-child {
+    border-bottom: none;
+  }
+  
+  .todo-item .completed {
+    text-decoration: line-through;
+    color: #6c757d;
+  }
+  
+  .delete-button {
+    padding: 0.4rem 0.8rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+  
