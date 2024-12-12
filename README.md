@@ -41,7 +41,7 @@ A simple and interactive web-based To-Do List application that helps users organ
 ### **Setup Steps**
 1. Clone the repository:
    ```bash
-   git clone github.com/CSE389-Team-TBD/Todo
+   git clone https://github.com/CSE389-Team-TBD/Todo
    ```
 2. Navigate to the project directory:
    ```bash
