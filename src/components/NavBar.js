@@ -12,15 +12,14 @@ function NavBar() {
   };
 
   return (
-    <nav className="bg-blue-500 text-white p-4 flex justify-between items-center">
-      <h1 className="text-xl font-bold">To-Do App</h1>
+    <div className="navbar-below">
       <button
         onClick={handleLogout}
-        className="bg-red-500 px-4 py-2 rounded text-white"
+        className="logout-button"
       >
         Logout
       </button>
-    </nav>
+    </div>
   );
 }
 

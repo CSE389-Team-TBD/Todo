@@ -41,7 +41,6 @@ function ToDoList() {
 
   return (
     <div className="todo-container">
-      <NavBar />
       <div className="todo-content">
         <h1>Your To-Do List</h1>
         <div className="todo-input">
@@ -72,6 +71,8 @@ function ToDoList() {
           ))}
         </ul>
       </div>
+      {/* Move NavBar below the To-Do List */}
+      <NavBar />
     </div>
   );
 }

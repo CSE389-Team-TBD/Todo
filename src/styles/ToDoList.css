@@ -75,6 +75,15 @@
     text-decoration: line-through;
     color: #6c757d;
   }
+
+  /* src/styles/ToDoList.css */
+
+.navbar-below {
+  margin-top: 2rem; /* Add some spacing above the logout button */
+  display: flex;
+  justify-content: center;
+}
+
   
   .delete-button {
     padding: 0.4rem 0.8rem;
@@ -86,6 +95,24 @@
     cursor: pointer;
     transition: background-color 0.3s;
   }
+
+  /* Style for the Logout button */
+.logout-button {
+  background-color: #007bff; 
+  color: white; 
+  border: none;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.logout-button:hover {
+  background-color: #0056b3; 
+}
+
+  
   
   .delete-button:hover {
     background-color: #c82333;
