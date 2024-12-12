@@ -41,11 +41,11 @@ A simple and interactive web-based To-Do List application that helps users organ
 ### **Setup Steps**
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone github.com/CSE389-Team-TBD/Todo
    ```
 2. Navigate to the project directory:
    ```bash
-   cd <repository-name>
+   cd Todo
    ```
 3. Install the dependencies:
    ```bash
