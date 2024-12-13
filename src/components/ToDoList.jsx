@@ -21,7 +21,7 @@ function ToDoList() {
   const priorityOrder = {
     "Very Important": 1,
     "Fairly Important": 2,
-    "Important": 3,
+    Important: 3,
     "Slightly Important": 4,
     "Not at all Important": 5,
   };
@@ -45,7 +45,11 @@ function ToDoList() {
 
   const addTodo = async () => {
     if (task.trim()) {
-      await addDoc(collection(db, "todos"), { task, completed: false, priority });
+      await addDoc(collection(db, "todos"), {
+        task,
+        completed: false,
+        priority,
+      });
       setTask("");
       setPriority("Not at all Important");
     }
@@ -119,12 +123,19 @@ function ToDoList() {
                     <option value="Very Important">Very Important</option>
                     <option value="Fairly Important">Fairly Important</option>
                     <option value="Important">Important</option>
-                    <option value="Slightly Important">Slightly Important</option>
-                    <option value="Not at all Important">Not at all Important</option>
+                    <option value="Slightly Important">
+                      Slightly Important
+                    </option>
+                    <option value="Not at all Important">
+                      Not at all Important
+                    </option>
                   </select>
                 </div>
               </div>
-              <button onClick={() => deleteTodo(todo.id)} className="delete-button">
+              <button
+                onClick={() => deleteTodo(todo.id)}
+                className="delete-button"
+              >
                 Delete
               </button>
             </li>

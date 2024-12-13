@@ -12,10 +12,7 @@ function NavBar() {
 
   return (
     <div className="navbar-below">
-      <button
-        onClick={handleLogout}
-        className="logout-button"
-      >
+      <button onClick={handleLogout} className="logout-button">
         Logout
       </button>
     </div>

@@ -9,7 +9,7 @@ const firebaseConfig = {
   storageBucket: "todo-cse389-syr.firebasestorage.app",
   messagingSenderId: "120533397775",
   appId: "1:120533397775:web:82f2ab183684f747fdce7a",
-  measurementId: "G-Q346Y78BL9"
+  measurementId: "G-Q346Y78BL9",
 };
 
 const app = initializeApp(firebaseConfig);
