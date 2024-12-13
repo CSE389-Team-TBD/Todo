@@ -1,120 +1,170 @@
 /* src/styles/ToDoList.css */
 
+/* Main Container */
 .todo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    padding: 2rem;
-  }
-  
-  .todo-content {
-    width: 100%;
-    max-width: 600px;
-    background: #ffffff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: #333;
-  }
-  
-  .todo-input {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .task-input {
-    flex-grow: 1;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  .add-button {
-    padding: 0.8rem 1rem;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .add-button:hover {
-    background-color: #218838;
-  }
-  
-  .todo-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .todo-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .todo-item:last-child {
-    border-bottom: none;
-  }
-  
-  .todo-item .completed {
-    text-decoration: line-through;
-    color: #6c757d;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  padding: 2rem;
+}
 
-  /* src/styles/ToDoList.css */
+/* Content Wrapper */
+.todo-content {
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+/* Header */
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+/* Input Section */
+.todo-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.task-input {
+  flex-grow: 1;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.add-button {
+  padding: 0.8rem 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #218838;
+}
+
+/* Task List */
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0.8rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+/* Task Text and Priority Section */
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Space between title and priority dropdown */
+  flex-grow: 1;
+}
+
+/* Priority Section */
+.priority-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.priority-label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.priority-select {
+  padding: 5px;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Bigger Delete Button */
+.delete-button {
+  padding: 12px 20px; /* Increased padding for larger size */
+  font-size: 1rem; /* Increased font size */
+  font-weight: bold; /* Make the text bold for emphasis */
+  color: white;
+  background-color: #f44336;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add smooth hover and press effect */
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.delete-button:active {
+  transform: scale(0.95); /* Press effect */
+}
+
+/* Completed Task */
+.completed {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+/* Navbar Below */
 .navbar-below {
-  margin-top: 2rem; /* Add some spacing above the logout button */
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
 }
 
-  
-  .delete-button {
-    padding: 0.4rem 0.8rem;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  /* Style for the Logout button */
+/* Logout Button */
 .logout-button {
-  background-color: #007bff; 
-  color: white; 
+  background-color: #007bff;
+  color: white;
   border: none;
-  padding: 10px 20px; 
-  font-size: 16px; 
+  padding: 10px 20px;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
 
-  
-  
-  .delete-button:hover {
-    background-color: #c82333;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .todo-item {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: flex-start;
   }
-  
+
+  .delete-button {
+    margin-top: 10px; /* Add spacing when the button stacks */
+  }
+}
