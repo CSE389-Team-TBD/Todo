@@ -32,10 +32,11 @@ A simple and interactive web-based To-Do List application that helps users organ
 
 ---
 
-## **How to Run the Project**
+## **How to Run the Project Locally**
 
 ### **Prerequisites**
-- Node.js installed on your machine.
+- A modern version of [Node.js](https://nodejs.org/en/download/prebuilt-installer) installed on your machine & `npm` in your PATH.
+- `git` installed and in your PATH.
 - A code editor (e.g., VSCode).
 
 ### **Setup Steps**
@@ -55,8 +56,8 @@ A simple and interactive web-based To-Do List application that helps users organ
    ```bash
    npm run dev
    ```
-5. Open the application in your browser:
-   - Go to `http://localhost:5173` in your favorite browser or to whichever IP:port combination you were assigned.
+---
+
 
 ---
 
@@ -117,6 +118,6 @@ This project is licensed under the [MIT License](LICENSE).
 - **Adya** - Frontend Development  
 - **Manu** - API, Web Server Setup
 - **Abheek** - Database Setup
-- **Joshua** - Firebase Authentication  
+- **Joshua** - Firebase / Backend Development
 
 ---
