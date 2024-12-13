@@ -53,10 +53,10 @@ A simple and interactive web-based To-Do List application that helps users organ
    ```
 4. Start the development server:
    ```bash
-   npm start
+   npm run dev
    ```
 5. Open the application in your browser:
-   - Go to `http://localhost:3000`.
+   - Go to `http://localhost:5173` in your favorite browser or to whichever IP:port combination you were assigned.
 
 ---
 
