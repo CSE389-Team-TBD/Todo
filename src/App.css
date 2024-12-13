@@ -1,101 +1,100 @@
 /* Reset some default browser styling */
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9; /* Light gray background for the app */
-    color: #333; /* Dark text color for better readability */
-  }
-  
-  /* Main container for the app */
-  .app-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-  }
-  
-  /* Title styling */
-  .app-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #4caf50; /* Green color for the title */
-    margin-bottom: 20px;
-  }
-  
-  /* Input field styling */
-  .task-input {
-    width: 300px;
-    padding: 10px;
-    font-size: 1rem;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-    margin-right: 10px;
-  }
-  
-  .task-input:focus {
-    border-color: #4caf50; /* Green border on focus */
-  }
-  
-  /* Add task button */
-  .add-task-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: white;
-    background-color: #4caf50;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-task-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-  }
-  
-  /* To-Do list container */
-  .task-list {
-    width: 100%;
-    max-width: 400px;
-    margin-top: 20px;
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  /* Individual task items */
-  .task-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Completed task style */
-  .task-item.completed {
-    text-decoration: line-through;
-    color: #888; /* Gray color for completed tasks */
-  }
-  
-  /* Delete button */
-  .delete-button {
-    padding: 5px 10px;
-    font-size: 0.9rem;
-    color: white;
-    background-color: #f44336;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .delete-button:hover {
-    background-color: #d32f2f; /* Darker red on hover */
-  }
-  
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9; /* Light gray background for the app */
+  color: #333; /* Dark text color for better readability */
+}
+
+/* Main container for the app */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Title styling */
+.app-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4caf50; /* Green color for the title */
+  margin-bottom: 20px;
+}
+
+/* Input field styling */
+.task-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  margin-right: 10px;
+}
+
+.task-input:focus {
+  border-color: #4caf50; /* Green border on focus */
+}
+
+/* Add task button */
+.add-task-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-task-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* To-Do list container */
+.task-list {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Individual task items */
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Completed task style */
+.task-item.completed {
+  text-decoration: line-through;
+  color: #888; /* Gray color for completed tasks */
+}
+
+/* Delete button */
+.delete-button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  color: white;
+  background-color: #f44336;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
