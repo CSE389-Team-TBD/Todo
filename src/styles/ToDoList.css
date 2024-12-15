@@ -1,14 +1,7 @@
 /* src/styles/ToDoList.css */
 
 /* Main Container */
-.todo-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f9f9f9;
-  min-height: 100vh;
-  padding: 2rem;
-}
+
 
 /* Content Wrapper */
 .todo-content {

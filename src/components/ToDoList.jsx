@@ -77,9 +77,9 @@ function ToDoList() {
   };
 
   return (
-    <div className="todo-container">
-      <div className="todo-content">
-        <h1>Your To-Do List</h1>
+    <div className="flex flex-col items-center bg-gray-100 min-h-screen p-8 dark:bg-stone-800 ">
+      <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md dark:bg-stone-600">
+        <h1 className="text-3xl mb-4 text-gray-800 dark:text-white">Your To-Do List</h1>
         <div className="todo-input">
           <input
             type="text"

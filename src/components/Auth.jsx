@@ -28,26 +28,26 @@ function Auth() {
   };
 
   return (
-    <div className="auth-container">
-      <h1>{isSignUp ? "Sign Up" : "Log In"}</h1>
+    <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
+      <h1 className="text-3xl mb-4 text-gray-800">{isSignUp ? "Sign Up" : "Log In"}</h1>
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="auth-input"
+        className="w-72 p-3 my-2 border border-gray-300 rounded-md text-base"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="auth-input"
+        className="w-72 p-3 my-2 border border-gray-300 rounded-md text-base"
       />
-      <button onClick={handleAuth} className="auth-button">
+      <button onClick={handleAuth} className="w-72 p-3 mt-4 bg-blue-500 text-white border-none rounded-md text-base cursor-pointer transition-colors duration-300 hover:bg-blue-700">
         {isSignUp ? "Sign Up" : "Log In"}
       </button>
-      <p onClick={() => setIsSignUp(!isSignUp)} className="toggle-link">
+      <p onClick={() => setIsSignUp(!isSignUp)} className="mt-4 text-sm text-blue-500 cursor-pointer underline hover:text-blue-700">
         {isSignUp ? "Already have an account? Log In" : "Create an account"}
       </p>
     </div>
