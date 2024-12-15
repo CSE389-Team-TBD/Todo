@@ -1,6 +1,7 @@
 ---
 
 # **To-Do List Application**
+[View a Sample Deployment](https://cis400-todo.pages.dev/)
 
 A simple and interactive web-based To-Do List application that helps users organize their tasks. Users can add, delete, and mark tasks as completed with a clean and responsive interface.
 
