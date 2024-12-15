@@ -69,9 +69,6 @@ todo-app/
 │   │   ├── Auth.js        # Authentication screen
 │   │   ├── ToDoList.js    # To-do list screen
 │   │   ├── NavBar.js      # Navigation bar
-│   ├── styles/            # CSS or Tailwind styles
-│   │   ├── Auth.css       # Styling for Auth component
-│   │   ├── ToDoList.css   # Styling for ToDoList component
 │   ├── firebase.js        # Firebase configuration
 │   ├── App.js             # Main app file with routing
 │   ├── index.js           # React entry point

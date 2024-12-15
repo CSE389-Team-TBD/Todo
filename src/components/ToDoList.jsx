@@ -1,7 +1,10 @@
 // src/components/ToDoList.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { db } from "../firebase";
+import { auth } from "../firebase"; // Make sure this is properly imported
+import { useAuthState } from "react-firebase-hooks/auth";
+
 import {
   collection,
   addDoc,
@@ -12,11 +15,18 @@ import {
 } from "firebase/firestore";
 import NavBar from "./NavBar";
 
+// If using react-firebase-hooks, for example:
+// import { useAuthState } from "react-firebase-hooks/auth";
+// const [user] = useAuthState(auth); // This would give you the authenticated user.
 
 function ToDoList() {
   const [todos, setTodos] = useState([]);
   const [task, setTask] = useState("");
   const [priority, setPriority] = useState("Not at all Important");
+  const [user, loading] = useAuthState(auth); 
+
+  // In this example, we'll just directly use auth.currentUser.
+  // In a real app, you'd want to handle loading states and the possibility of no logged-in user.
 
   // Define priority order for sorting
   const priorityOrder = {
@@ -28,25 +38,35 @@ function ToDoList() {
   };
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
+    // If loading is true, Firebase Auth is still checking the user's sign-in state
+    // If no user is logged in, we can't load user-specific todos
+    if (loading || !user) {
+      setTodos([]);
+      return;
+    }
+  
+    const userTodosRef = collection(db, "users", user.uid, "todos");
+    const unsubscribe = onSnapshot(userTodosRef, (snapshot) => {
       const todosData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
-      // Sort tasks by priority
+  
       const sortedTodos = todosData.sort(
         (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
       );
-
+  
       setTodos(sortedTodos);
     });
-    return unsubscribe;
-  }, []);
+  
+    // Cleanup the subscription on unmount
+    return () => unsubscribe();
+  }, [user, loading]);
 
   const addTodo = async () => {
+    if (!user) return; // Ensure user is logged in.
     if (task.trim()) {
-      await addDoc(collection(db, "todos"), {
+      await addDoc(collection(db, "users", user.uid, "todos"), {
         task,
         completed: false,
         priority,
@@ -57,12 +77,14 @@ function ToDoList() {
   };
 
   const toggleCompletion = async (id, completed) => {
-    const todoRef = doc(db, "todos", id);
+    if (!user) return;
+    const todoRef = doc(db, "users", user.uid, "todos", id);
     await updateDoc(todoRef, { completed: !completed });
   };
 
   const updatePriority = async (id, newPriority) => {
-    const todoRef = doc(db, "todos", id);
+    if (!user) return;
+    const todoRef = doc(db, "users", user.uid, "todos", id);
     await updateDoc(todoRef, { priority: newPriority });
 
     // Re-sort todos after updating priority
@@ -74,25 +96,28 @@ function ToDoList() {
   };
 
   const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "todos", id));
+    if (!user) return;
+    await deleteDoc(doc(db, "users", user.uid, "todos", id));
   };
 
   const listVariants = {
-    hidden: { opacity: 0, y: 20 }, // Animation for when items are entering
+    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, scale: 0.8 }, // Animation for when items are exiting
+    exit: { opacity: 0, scale: 0.8 },
   };
 
   return (
     <div className="flex flex-col items-center bg-gray-100 min-h-screen p-8 dark:bg-slate-900">
       <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md dark:bg-slate-800">
-      <motion.div
-        className="flex flex-col justify-center items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-      >
-        <h1 className="text-3xl mb-6 text-center text-gray-800 dark:text-white">Your To-Do List</h1>
+        <motion.div
+          className="flex flex-col justify-center items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          <h1 className="text-3xl mb-6 text-center text-gray-800 dark:text-white">
+            Your To-Do List
+          </h1>
         </motion.div>
         <div className="flex gap-2 mb-6">
           <input
@@ -113,12 +138,14 @@ function ToDoList() {
             <option value="Slightly Important">Slightly Important</option>
             <option value="Not at all Important">Not at all Important</option>
           </select>
-          <button onClick={addTodo} className="px-4 py-3 bg-green-600  text-white border-none rounded-md text-base cursor-pointer transition-colors duration-300 hover:bg-green-700">
+          <button
+            onClick={addTodo}
+            className="px-4 py-3 bg-green-600  text-white border-none rounded-md text-base cursor-pointer transition-colors duration-300 hover:bg-green-700"
+          >
             Add
           </button>
         </div>
 
-        
         {/* Animated Todo List */}
         <ul className="list-none p-0 m-0">
           <AnimatePresence>
@@ -139,9 +166,7 @@ function ToDoList() {
                         ? "line-through text-gray-500 dark:text-slate-400 text-lg"
                         : "dark:text-white text-lg"
                     }
-                    onClick={() =>
-                      toggleCompletion(todo.id, todo.completed)
-                    }
+                    onClick={() => toggleCompletion(todo.id, todo.completed)}
                   >
                     {todo.task}
                   </span>
@@ -151,15 +176,11 @@ function ToDoList() {
                     </p>
                     <select
                       value={todo.priority || "Not at all Important"}
-                      onChange={(e) =>
-                        updatePriority(todo.id, e.target.value)
-                      }
+                      onChange={(e) => updatePriority(todo.id, e.target.value)}
                       className="p-1 text-sm rounded-md bg-white cursor-pointer dark:bg-slate-700 dark:text-white"
                     >
                       <option value="Very Important">Very Important</option>
-                      <option value="Fairly Important">
-                        Fairly Important
-                      </option>
+                      <option value="Fairly Important">Fairly Important</option>
                       <option value="Important">Important</option>
                       <option value="Slightly Important">
                         Slightly Important
