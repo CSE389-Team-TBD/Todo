@@ -1,4 +1,4 @@
-// src/components/ToDoList.js
+// src/components/ToDoList.jsx
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import {
@@ -10,7 +10,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import NavBar from "./NavBar";
-import "../styles/ToDoList.css";
+
 
 function ToDoList() {
   const [todos, setTodos] = useState([]);
@@ -77,21 +77,21 @@ function ToDoList() {
   };
 
   return (
-    <div className="flex flex-col items-center bg-gray-100 min-h-screen p-8 dark:bg-stone-800 ">
-      <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md dark:bg-stone-600">
-        <h1 className="text-3xl mb-4 text-gray-800 dark:text-white">Your To-Do List</h1>
-        <div className="todo-input">
+    <div className="flex flex-col items-center bg-gray-100 min-h-screen p-8  ">
+      <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md ">
+        <h1 className="text-3xl mb-6 text-center text-gray-800">Your To-Do List</h1>
+        <div className="flex gap-2 mb-6">
           <input
             type="text"
             value={task}
             onChange={(e) => setTask(e.target.value)}
             placeholder="Enter a new task"
-            className="task-input"
+            className="flex-grow p-3 border border-gray-300 rounded-md text-base"
           />
           <select
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
-            className="priority-select"
+            className="p-1 text-sm border border-gray-300 rounded-md bg-white cursor-pointer"
           >
             <option value="Very Important">Very Important</option>
             <option value="Fairly Important">Fairly Important</option>
@@ -99,26 +99,26 @@ function ToDoList() {
             <option value="Slightly Important">Slightly Important</option>
             <option value="Not at all Important">Not at all Important</option>
           </select>
-          <button onClick={addTodo} className="add-button">
+          <button onClick={addTodo} className="px-4 py-3 bg-green-600 text-white border-none rounded-md text-base cursor-pointer transition-colors duration-300 hover:bg-green-700">
             Add
           </button>
         </div>
-        <ul className="todo-list">
+        <ul className="list-none p-0 m-0">
           {todos.map((todo) => (
-            <li key={todo.id} className="todo-item">
-              <div className="task-details">
+            <li key={todo.id} className="flex items-center justify-between py-4 px-3 border-b border-gray-300 last:border-b-0">
+              <div className="flex flex-col gap-1 flex-grow">
                 <span
-                  className={todo.completed ? "completed" : ""}
+                  className={todo.completed ? "line-through text-gray-500" : ""}
                   onClick={() => toggleCompletion(todo.id, todo.completed)}
                 >
                   {todo.task}
                 </span>
-                <div className="priority-container">
-                  <p className="priority-label">Priority:</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-sm text-gray-600">Priority:</p>
                   <select
                     value={todo.priority || "Not at all Important"}
                     onChange={(e) => updatePriority(todo.id, e.target.value)}
-                    className="priority-select"
+                    className="p-1 text-sm border border-gray-300 rounded-md bg-white cursor-pointer"
                   >
                     <option value="Very Important">Very Important</option>
                     <option value="Fairly Important">Fairly Important</option>
@@ -134,7 +134,7 @@ function ToDoList() {
               </div>
               <button
                 onClick={() => deleteTodo(todo.id)}
-                className="delete-button"
+                className="px-5 py-3 text-base font-bold text-white bg-red-500 border-none rounded-lg cursor-pointer transition-transform transform duration-200 ease-in-out hover:bg-red-600 hover:scale-105 active:scale-95"
               >
                 Delete
               </button>

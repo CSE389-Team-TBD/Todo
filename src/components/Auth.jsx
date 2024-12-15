@@ -1,4 +1,4 @@
-// src/components/Auth.js
+// src/components/Auth.jsx
 import { useState } from "react";
 import { auth } from "../firebase";
 import {
@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "../styles/Auth.css";
+
 
 function Auth() {
   const [email, setEmail] = useState("");

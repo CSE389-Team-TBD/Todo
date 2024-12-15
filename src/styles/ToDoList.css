@@ -14,12 +14,7 @@
 }
 
 /* Header */
-h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #333;
-}
+
 
 /* Input Section */
 .todo-input {
@@ -161,3 +156,4 @@ h1 {
     margin-top: 10px; /* Add spacing when the button stacks */
   }
 }
+
