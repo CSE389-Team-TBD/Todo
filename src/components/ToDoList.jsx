@@ -26,7 +26,7 @@ function ToDoList() {
   const priorityOrder = {
     "Very Important": 1,
     "Fairly Important": 2,
-    Important: 3,
+    "Important": 3,
     "Slightly Important": 4,
     "Not at all Important": 5,
   };
