@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { db } from "../firebase";
-import { auth } from "../firebase"; // Make sure this is properly imported
+import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import {
@@ -15,56 +15,49 @@ import {
 } from "firebase/firestore";
 import NavBar from "./NavBar";
 
-// If using react-firebase-hooks, for example:
-// import { useAuthState } from "react-firebase-hooks/auth";
-// const [user] = useAuthState(auth); // This would give you the authenticated user.
-
 function ToDoList() {
-  const [todos, setTodos] = useState([]);
-  const [task, setTask] = useState("");
-  const [priority, setPriority] = useState("Not at all Important");
-  const [user, loading] = useAuthState(auth); 
+  // State management using React hooks
+  const [todos, setTodos] = useState([]); // Stores the list of todos
+  const [task, setTask] = useState(""); // Stores the current task input value
+  const [priority, setPriority] = useState("Not at all Important"); // Stores the selected priority
+  const [user, loading] = useAuthState(auth); // Hook to manage Firebase authentication state
 
-  // In this example, we'll just directly use auth.currentUser.
-  // In a real app, you'd want to handle loading states and the possibility of no logged-in user.
-
-  // Define priority order for sorting
+  // Priority ordering object for sorting todos
   const priorityOrder = {
     "Very Important": 1,
     "Fairly Important": 2,
-    "Important": 3,
+    Important: 3,
     "Slightly Important": 4,
     "Not at all Important": 5,
   };
 
+  // useEffect hook to fetch and subscribe to todos from Firebase
   useEffect(() => {
-    // If loading is true, Firebase Auth is still checking the user's sign-in state
-    // If no user is logged in, we can't load user-specific todos
     if (loading || !user) {
       setTodos([]);
       return;
     }
-  
+
     const userTodosRef = collection(db, "users", user.uid, "todos");
     const unsubscribe = onSnapshot(userTodosRef, (snapshot) => {
       const todosData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-  
+
       const sortedTodos = todosData.sort(
         (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
       );
-  
+
       setTodos(sortedTodos);
     });
-  
-    // Cleanup the subscription on unmount
+
     return () => unsubscribe();
   }, [user, loading]);
 
+  // Function handlers for todo operations
   const addTodo = async () => {
-    if (!user) return; // Ensure user is logged in.
+    if (!user) return;
     if (task.trim()) {
       await addDoc(collection(db, "users", user.uid, "todos"), {
         task,
@@ -87,7 +80,6 @@ function ToDoList() {
     const todoRef = doc(db, "users", user.uid, "todos", id);
     await updateDoc(todoRef, { priority: newPriority });
 
-    // Re-sort todos after updating priority
     setTodos((prevTodos) =>
       [...prevTodos].sort(
         (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
@@ -100,6 +92,7 @@ function ToDoList() {
     await deleteDoc(doc(db, "users", user.uid, "todos", id));
   };
 
+  // Animation variants for Framer Motion
   const listVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -107,8 +100,11 @@ function ToDoList() {
   };
 
   return (
+    // Main container with dark mode support
     <div className="flex flex-col items-center bg-gray-100 min-h-screen p-8 dark:bg-slate-900">
+      {/* Card container for todo list */}
       <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md dark:bg-slate-800">
+        {/* Animated header section using Framer Motion */}
         <motion.div
           className="flex flex-col justify-center items-center"
           initial={{ opacity: 0 }}
@@ -119,7 +115,10 @@ function ToDoList() {
             Your To-Do List
           </h1>
         </motion.div>
+
+        {/* Input section for new todos */}
         <div className="flex gap-2 mb-6">
+          {/* Task input field */}
           <input
             type="text"
             value={task}
@@ -127,6 +126,7 @@ function ToDoList() {
             placeholder="Enter a new task"
             className="flex-grow p-3 border border-gray-300 rounded-md text-base dark:bg-slate-900 dark:text-white"
           />
+          {/* Priority selection dropdown */}
           <select
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
@@ -138,17 +138,20 @@ function ToDoList() {
             <option value="Slightly Important">Slightly Important</option>
             <option value="Not at all Important">Not at all Important</option>
           </select>
+          {/* Add button */}
           <button
             onClick={addTodo}
-            className="px-4 py-3 bg-green-600  text-white border-none rounded-md text-base cursor-pointer transition-colors duration-300 hover:bg-green-700"
+            className="px-4 py-3 bg-green-600 text-white border-none rounded-md text-base cursor-pointer transition-colors duration-300 hover:bg-green-700"
           >
             Add
           </button>
         </div>
 
-        {/* Animated Todo List */}
+        {/* Animated todo list section */}
         <ul className="list-none p-0 m-0">
+          {/* AnimatePresence enables exit animations */}
           <AnimatePresence>
+            {/* Map through todos array to create list items */}
             {todos.map((todo) => (
               <motion.li
                 key={todo.id}
@@ -159,7 +162,9 @@ function ToDoList() {
                 exit="exit"
                 transition={{ duration: 0.3 }}
               >
+                {/* Todo item content container */}
                 <div className="flex flex-col gap-1 flex-grow">
+                  {/* Todo text with completion toggle */}
                   <span
                     className={
                       todo.completed
@@ -170,6 +175,7 @@ function ToDoList() {
                   >
                     {todo.task}
                   </span>
+                  {/* Priority selection for existing todo */}
                   <div className="flex items-center gap-2">
                     <p className="text-sm text-gray-600 dark:text-gray-200">
                       Priority:
@@ -191,6 +197,7 @@ function ToDoList() {
                     </select>
                   </div>
                 </div>
+                {/* Delete button with hover and active animations */}
                 <button
                   onClick={() => deleteTodo(todo.id)}
                   className="px-5 py-3 text-base font-bold text-white bg-red-500 border-none rounded-lg cursor-pointer transition-transform transform duration-200 ease-in-out hover:bg-red-600 hover:scale-105 active:scale-95"
@@ -202,6 +209,7 @@ function ToDoList() {
           </AnimatePresence>
         </ul>
       </div>
+      {/* Navigation bar component */}
       <NavBar />
     </div>
   );

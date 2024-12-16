@@ -36,6 +36,9 @@ replay_pid*
 # AWS User-specific
 .idea/**/aws.xml
 
+# MacOS
+.DS_Store
+
 # Generated files
 .idea/**/contentModel.xml
 

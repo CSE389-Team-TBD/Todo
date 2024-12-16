@@ -8,6 +8,7 @@ export default {
   theme: {
     extend: {},
     fontFamily: {
+      // Set Arial as the Main Font for the App.
       sans: ['"Arial"', 'sans-serif']
     }
   },

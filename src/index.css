@@ -1,5 +1,25 @@
 /* src/index.css */
 
+/* This file configures Tailwind CSS for the application */
+
+/* @tailwind base: 
+   - Injects Tailwind's base styles
+   - Includes CSS reset/normalize
+   - Sets basic styles like default margins, fonts, etc.
+*/
 @tailwind base;
+
+/* @tailwind components:
+   - Injects component classes
+   - Enables use of @apply directive
+   - Includes any component classes defined in your project
+*/
 @tailwind components;
+
+/* @tailwind utilities:
+   - Injects all of Tailwind's utility classes
+   - Includes responsive variants
+   - Includes hover, focus, and other state variants
+   - This is where most of Tailwind's classes come from
+*/
 @tailwind utilities;
